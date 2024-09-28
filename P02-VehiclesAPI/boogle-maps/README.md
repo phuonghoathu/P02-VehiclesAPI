@@ -21,6 +21,7 @@ command line by using
 ```
 $ curl http://localhost:9191/maps\?lat\=20.0\&lon\=30.0
 ``` 
+![img.png](img.png)
 
 You can also import it as a Maven project on your preferred IDE and 
 run the class `BoogleMapsApplication`.
