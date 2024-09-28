@@ -36,7 +36,8 @@ $ mvn clean package
 ```
 $ java -jar target/vehicles-api-0.0.1-SNAPSHOT.jar
 ```
-![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
 
 Import it in your favorite IDE as a Maven Project.
 

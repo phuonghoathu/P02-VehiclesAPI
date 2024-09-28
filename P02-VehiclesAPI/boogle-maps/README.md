@@ -14,6 +14,7 @@ $ mvn clean package
 ```
 $ java -jar target/boogle-maps-0.0.1-SNAPSHOT.jar
 ```
+![img_1.png](img_1.png)
 
 The service is available by default on port `9191`. You can check it on the 
 command line by using
