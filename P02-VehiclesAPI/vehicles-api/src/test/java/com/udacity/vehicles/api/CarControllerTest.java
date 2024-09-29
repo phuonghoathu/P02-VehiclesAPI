@@ -84,26 +84,6 @@ public class CarControllerTest {
     }
 
     /**
-     * Tests for successful update of car in the system
-     * @throws Exception when car creation fails in the system
-     */
-    @Test
-    public void updateCar() throws Exception {
-        Car expect = getCar();
-        expect.setLocation(new Location(70.730610, -73.935242));
-        expect.setId(1L);
-        given(carService.save(any())).willReturn(expect);
-        mvc.perform(put(new URI("/cars/1"))
-                        .content(json.write(expect).getJson())
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("location.lat", is(expect.getLocation().getLat())))
-                .andExpect(jsonPath("details.model", is(expect.getDetails().getModel())))
-                .andExpect(jsonPath("details.manufacturer.code", is(expect.getDetails().getManufacturer().getCode())))
-                .andExpect(jsonPath("condition", is(expect.getCondition().toString())));;
-    }
-    /**
      * Tests if the read operation appropriately returns a list of vehicles.
      * @throws Exception if the read operation of the vehicle list fails
      */
@@ -160,6 +140,29 @@ public class CarControllerTest {
         mvc.perform(delete(new URI("/cars/1"))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isNoContent());
+    }
+
+    /**
+     * Tests for successful update of car in the system
+     * @throws Exception when car creation fails in the system
+     */
+    @Test
+    public void updateCar() throws Exception {
+        Car expect = getCar();
+        expect.setLocation(new Location(70.730610, -73.935242));
+        expect.setCondition(Condition.NEW);
+        expect.setId(1L);
+        given(carService.save(any())).willReturn(expect);
+        mvc.perform(put(new URI("/cars/1"))
+                        .content(json.write(expect).getJson())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("condition", is(expect.getCondition().toString())))
+                .andExpect(jsonPath("location.lat", is(expect.getLocation().getLat())))
+                .andExpect(jsonPath("details.model", is(expect.getDetails().getModel())))
+                .andExpect(jsonPath("details.manufacturer.code", is(expect.getDetails().getManufacturer().getCode())))
+                .andExpect(jsonPath("condition", is(expect.getCondition().toString())));
     }
 
     /**
